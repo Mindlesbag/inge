@@ -1,0 +1,132 @@
+
+    .logo img {
+      height: 150px;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-image: url('fondo1.jpeg');
+      background-size: cover;
+      background-attachment: fixed;
+      background-repeat: no-repeat;
+    }
+
+    /* HEADER */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(238, 175, 3, 0.8);
+      color: white;
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    header .logo img {
+      height: 100px;
+    }
+
+    /* MAIN CONTENT */
+    .main-content {
+      padding-top: 150px; /* espacio para el header */
+      display: flex;
+      justify-content: center;
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+
+    .container {
+      display: flex;
+      gap: 20px;
+      max-width: 1200px;
+      width: 95%;
+    }
+
+    .sidebar {
+      background: rgba(250, 141, 40, 0.849);
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      flex: 1;
+    }
+
+    .sidebar h4 {
+      margin-top: 0;
+      color: #ffffff;
+    }
+
+    .sidebar h2 {
+      margin-top: 0;
+      color: #ffffff;
+    }
+    .sidebar h3 {
+      color: #ffffff;
+    }
+    .sidebar label {
+      display: block;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+
+    .sidebar input,
+    .sidebar textarea,
+    .sidebar select {
+      width: 95%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 14px;
+      transition: border 0.3s;
+    }
+
+    .sidebar button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      border: none;
+      border-radius: 4px;
+      font-size: 14px;
+      background-color: #007bff;
+      color: white;
+      cursor: pointer;
+      transition: transform 0.2s ease, background-color 0.3s;
+    }
+
+    .sidebar button:hover {
+      background-color: #0056b3;
+      transform: scale(1.05);
+    }
+
+    .map-container {
+      flex: 2;
+    }
+
+    #map {
+      height: 500px;
+      width: 100%;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+    /* Diseño por defecto (desktop) */
+.container {
+  display: flex;
+  gap: 20px; /* Espacio entre sidebar y mapa */
+}
+
+/* Vista móvil */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column; /* Colocar uno debajo del otro */
+  }
+  .map-container {
+    order: 2; /* Asegura que el mapa vaya después */
+  }
+  .sidebar {
+    order: 1; /* Sidebar primero */
+  }
+}
