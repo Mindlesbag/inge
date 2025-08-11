@@ -1,38 +1,50 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inicio de Sesion</title>
-    <body style="background-image: url('fondo1.jpeg');">
-    <link rel="stylesheet" href="css index.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Inicio de Sesión</title>
 </head>
-<header>
-  <div class="logo">
-    <a href="indexx.html">
-      <img src="intendencia logo.png" alt="Intendencia de Soriano">
-    </a>
-  </div>
-</header>
- <div class="main-content">
-  <div class="container">
-    <div class="sidebar">
-      <CENTER><h2>Ingrese sus credenciales:</h2></CENTER>
-      <h3>
-      <label for="Cedula">Cédula:</label>
-      <input type="text" id="Cedula" placeholder="Escriba su cédula...">
-      
-      <label for="Contraseña">Contraseña:</label>
-      <input type="text" id="Contraseña" placeholder="Ingrese su contraseña...">
-      <button id="btnEnviar">Iniciar Sesion</button>
-    </h3>
-      <h4><CENTER>¿Aun no estas registrado?</CENTER>
-      <button onclick="window.location.href='registro.html'">Registrarse</button>
-</h4></div></div></div>
-    
-<main>
-   
-</body>
+<body>
 
+  <form id="loginForm" action="login.php" method="post">
+    <label for="Cedula">Cédula:</label>
+    <input type="text" id="Cedula" name="cedula" placeholder="Escriba su cédula..." required>
+
+    <label for="Contrasena">Contraseña:</label>
+    <input type="password" id="Contrasena" name="contrasena" placeholder="Ingrese su contraseña..." required>
+
+    <button type="submit">Iniciar Sesión</button>
+  </form>
+
+  <script>
+    // Función para convertir ArrayBuffer a hex
+    function bufferToHex(buffer) {
+      return Array.from(new Uint8Array(buffer))
+                  .map(b => b.toString(16).padStart(2, '0'))
+                  .join('');
+    }
+
+    // Función para calcular SHA-256
+    async function sha256Hex(text) {
+      const encoder = new TextEncoder();
+      const data = encoder.encode(text);
+      const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+      return bufferToHex(hashBuffer);
+    }
+
+    // Evento antes de enviar el formulario
+    document.getElementById('loginForm').addEventListener('submit', async function(event) {
+      event.preventDefault(); // Evita el envío inmediato
+
+      const passInput = document.getElementById('Contrasena');
+      const hash = await sha256Hex(passInput.value);
+
+      passInput.value = hash; // Reemplaza la contraseña por su hash
+
+      this.submit(); // Envía el formulario con la contraseña ya encriptada
+    });
+  </script>
+
+</body>
 </html>
